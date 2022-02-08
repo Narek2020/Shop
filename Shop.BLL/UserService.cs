@@ -50,26 +50,26 @@ namespace Shop.BLL
 
             return 1;
         }
-
-        public bool GetUsersForLogin(string userEmail, string userPassword)
+        //TODO:poxancel model 
+        public bool GetUsersForLogin(UserModel user)
         {
             
             bool result = false;
             var users = GetUsers();
-            var existuser = users.Where(u => u.Email == userEmail && u.Password == userPassword).FirstOrDefault();
+            var existuser = users.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
 
 
             if (existuser != null)
             {
-                var user = (existuser.Id, userEmail, existuser.Status);
+                
 
                 var encodedTicket = FormsAuthentication.Encrypt(
                    new FormsAuthenticationTicket(
                       1,
-                      user.userEmail,
+                      user.Email,
                       DateTime.Now,
                       DateTime.UtcNow.Add(FormsAuthentication.Timeout),
-                      true,
+                      user.Checked,
                       user.Id.ToString()+"/"+ user.Status.ToString()));
 
                 var httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);

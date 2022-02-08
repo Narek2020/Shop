@@ -208,6 +208,7 @@
     <Content Include="images\item-cart-03.jpg" />
     <Content Include="images\item-cart-04.jpg" />
     <Content Include="images\item-cart-05.jpg" />
+    <Content Include="images\Loader.gif" />
     <Content Include="images\product-01.jpg" />
     <Content Include="images\product-02.jpg" />
     <Content Include="images\product-03.jpg" />

@@ -1,6 +1,9 @@
 $(document).ready(function () {
-    console.log(userName);
     
+    let loader = $(".loader");
+
+
+
     if (userName != null) {
         $.ajax({
             url: "/Home/GetOrder",
@@ -16,8 +19,15 @@ $(document).ready(function () {
         })
     }
     
-    
+    $(document).on({
+        ajaxStart: function () {
+            loader.removeClass("d-none");
+        },
 
-    console.log("end!");
-
+        ajaxStop: function () {
+            loader.addClass("d-none");
+        }
+    })
 })
+
+

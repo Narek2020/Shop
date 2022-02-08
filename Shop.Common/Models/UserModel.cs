@@ -18,7 +18,7 @@ namespace Shop.Common.Models
         [Required(ErrorMessage = "Field can't be empty")]
         [MinLength(3, ErrorMessage = "Field must be more then 3 character")]
         public string Password { get; set; }
-
+        public bool Checked { get; set; }
         public bool Status  { get; set; }
     }
 }

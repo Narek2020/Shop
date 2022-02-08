@@ -41,7 +41,8 @@ namespace Shop.Controllers
 
         [HttpGet]
         public ActionResult LogIN()
-        { 
+        {
+            FormsAuthentication.SignOut();
             return View();
         }
 
@@ -50,7 +51,7 @@ namespace Shop.Controllers
         {
             UserService userService = new UserService();
             
-            if (ModelState.IsValid && userService.GetUsersForLogin(user.Email, user.Password))
+            if (ModelState.IsValid && userService.GetUsersForLogin(user))
             {
             //    Session["id"] = result;
                 return RedirectToAction("Index");
@@ -62,6 +63,7 @@ namespace Shop.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            FormsAuthentication.SignOut();
             return View();
         }
 

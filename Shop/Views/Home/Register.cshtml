@@ -5,19 +5,7 @@
 @{
     ViewBag.Title = "Register";
 }
-<script>
-    $(document).ready(function () {
-       
-        $("button").click(function (event) {
-            let pass = $("#exampleInputPassword").val();
-            let passconf = $("#exampleInputPassword1").val();
-            if (pass != passconf) {
-                event .preventDefault();
-                $("#confirmationMessage").text("Not the same");
-            }
-        })
-    });
-</script>
+
 <div style="height: 150px">
 
 </div>
@@ -31,26 +19,34 @@
         <div class="row">
             @using (Html.BeginForm("Register", "Home", FormMethod.Post))
             {
-                <div class="mb-3">
-                    @*@Html.LabelFor(m => m.Email,new {@class= "form-label"})
-                    @Html.EditorFor(m => m.Email, new { @class = "form-control"})*@
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div class="text-danger">@Html.ValidationMessageFor(m => m.Email)</div>
-                </div>
+            <div class="mb-3">
+                @*@Html.LabelFor(m => m.Email,new {@class= "form-label"})
+            @Html.EditorFor(m => m.Email, new { @class = "form-control"})*@
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div class="text-danger">@Html.ValidationMessageFor(m => m.Email)</div>
+            </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputPassword" class="form-label">Password</label>
-                    <input type="password" name="Password" class="form-control" id="exampleInputPassword">
-                    <div class="text-danger">@Html.ValidationMessageFor(m => m.Password)</div>
-                </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword" class="form-label">Password</label>
+                <input type="password" name="Password" class="form-control" id="exampleInputPassword">
+                <div class="text-danger">@Html.ValidationMessageFor(m => m.Password)</div>
+            </div>
 
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
-                    <div id="confirmationMessage" class="text-danger"></div>
-                </div>
-                <button type="submit" class="btn btn-primary">Create account</button>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+                <div id="confirmationMessage" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3  ml-4  form-check">
+                <input class="form-check-input " type="checkbox" value="" id="checkPass">
+                <label class="form-check-label" for="flexCheckDefault">Show Password</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create account</button>
+
+
             }
         </div>
         <div class="text-danger">@Html.ValidationMessage("LogOnError")</div>
@@ -58,3 +54,4 @@
     <div class="col-md-4"></div>
 </div>
 
+<script src="~/Scripts/js/RegisterPage.js">    </script>
