@@ -60,7 +60,7 @@
                     <nav class="limiter-menu-desktop container">
 
                         <!-- Logo desktop -->
-                        <a href="#" class="logo">
+                        <a href="/" class="logo">
                             <img src="~/images/icons/logo-01.png" alt="IMG-LOGO">
                         </a>
 
@@ -252,10 +252,20 @@
                         </h4>
 
                         <ul>
-                            <li class="p-b-10">
-                                @Html.ActionLink("Log in | Register", "LogIN", "Home", null, new { @class = "stext-107 cl7 hov-cl1 trans-04" })
-                            </li>
-
+                            @{
+                                if (string.IsNullOrWhiteSpace(user))
+                                {
+                                    <li class="p-b-10">
+                                        @Html.ActionLink("Log in | Register", "LogIN", "Home", null, new { @class = "stext-107 cl7 hov-cl1 trans-04" })
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="p-b-10">
+                                        @Html.ActionLink("Log Out", "LogOut", "Home", null, new { @class = "stext-107 cl7 hov-cl1 trans-04" })
+                                    </li>
+                                }
+                            }
                             <li class="p-b-10">
                                 <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
                                     Returns
@@ -268,9 +278,6 @@
                                 </a>
                             </li>
 
-                            <li class="p-b-10">
-                                @Html.ActionLink("Log Out", "LogOut", "Home", null, new { @class = "stext-107 cl7 hov-cl1 trans-04" })
-                            </li>
                         </ul>
                     </div>
 

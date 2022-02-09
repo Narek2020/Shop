@@ -66,11 +66,11 @@ namespace Shop.BLL
                 var encodedTicket = FormsAuthentication.Encrypt(
                    new FormsAuthenticationTicket(
                       1,
-                      user.Email,
+                      existuser.Email,
                       DateTime.Now,
                       DateTime.UtcNow.Add(FormsAuthentication.Timeout),
                       user.Checked,
-                      user.Id.ToString()+"/"+ user.Status.ToString()));
+                      existuser.Id.ToString()+"/"+ existuser.Status.ToString()));
 
                 var httpCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encodedTicket);
                 HttpContext.Current.Response.Cookies.Add(httpCookie);

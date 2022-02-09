@@ -325,7 +325,7 @@
     <Content Include="fonts\Poppins\Poppins-Thin.ttf" />
     <Content Include="fonts\Poppins\Poppins-ThinItalic.ttf" />
     <Content Include="Scripts\js\layoutt.js" />
-    <Content Include="Scripts\js\order.js" />
+    <Content Include="Scripts\js\orderPage.js" />
     <Content Include="Scripts\js\main.js" />
     <Content Include="Scripts\js\map-custom.js" />
     <Content Include="Scripts\js\slick-custom.js" />

@@ -11,9 +11,9 @@ $(document).ready(function () {
             success: function (data) {
 
                 $(".orderCount").attr("data-notify", data.length);
-
+                let countFin = data.length < 3 ? data.length : 3;
                 if (data.length > 0) {
-                    GetUserCard(data, 3, "More Items");
+                    GetUserCard(data, countFin, "More Items");
                 }
                 console.log(data[0]);
             }
@@ -33,7 +33,7 @@ $(document).ready(function () {
 })
 
 
-function GetUserCard(orderedProduct , count,itemText) {
+function GetUserCard(orderedProduct,count,itemText) {
     
     
     let totalPriceForProduct = 0;
@@ -47,13 +47,14 @@ function GetUserCard(orderedProduct , count,itemText) {
         
         let li = $("<li class='header-cart-item flex-w flex-t m-b-12'></li>");
         let divImg = $("<div class='header-cart-item-img'></div>");
-        let img = $("<img src='images/item-cart-01.jpg' alt='IMG'>");
+        
+        let img = $("<img src='/images/"+ orderedProduct[i].ProductName+".jpg'>");
         divImg.append(img);
         
         let divItem = $("<div class='header-cart-item-txt p-t-8'></div>");
 
         let itemText = $("<a href='#' class='header-cart-item-name m-b-18 hov-cl1 trans-04'>" + orderedProduct[i].ProductName + "</a>");
-        let itemPrice = $("<span class='header-cart-item-info'>" + orderedProduct[i].Count+" x "+ orderedProduct[i].ProductPrice + "</span>");
+        let itemPrice = $("<span class='header-cart-item-info'>"+orderedProduct[i].Count+" x "+ orderedProduct[i].ProductPrice + "</span>");
         divItem.append(itemText);
         divItem.append(itemPrice);
 
@@ -65,7 +66,7 @@ function GetUserCard(orderedProduct , count,itemText) {
 
     let total = $("<div class='w-full'></div>");
 
-    let totalPrice = $("<div class='header-cart-total w-full p-tb-40'>Total: $" + totalPriceForProduct + "</div>");
+    let totalPrice = $("<div class='header-cart-total w-full p-tb-40'>Total: AMD " + totalPriceForProduct + "</div>");
 
     let totalButton = $("<div class='header-cart-buttons flex-w w-full'></div>");
     let totalButtonHref = $("<a href='shoping-cart.html' class='flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10'>Check Out</a>");
@@ -83,6 +84,7 @@ function GetUserCard(orderedProduct , count,itemText) {
     $(totalButtonMore).click(function () {
 
         let y = $(this).text();
+        let countFin = orderedProduct.length < 3 ? orderedProduct.length : 3;
         
         if (y == "More Items")
         {
@@ -92,7 +94,7 @@ function GetUserCard(orderedProduct , count,itemText) {
         }
         else {
             headerCard.empty();
-            GetUserCard(orderedProduct, 3, "More Items");
+            GetUserCard(orderedProduct, countFin, "More Items");
            
         }
         

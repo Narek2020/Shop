@@ -43,6 +43,7 @@ namespace Shop.Controllers
         public ActionResult LogIN()
         {
             FormsAuthentication.SignOut();
+
             return View();
         }
 
@@ -74,7 +75,7 @@ namespace Shop.Controllers
             
             if (userService.CheckUser(user.Email))
             {
-                ModelState.AddModelError("LogOnError", "This Email have already registered");
+                ModelState.AddModelError("LogOnError", "This email address is already being used");
             }
 
             if(ModelState.IsValid)

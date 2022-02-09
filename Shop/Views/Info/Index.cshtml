@@ -5,12 +5,16 @@
 @{
     FormsIdentity ident = (FormsIdentity)Context.User.Identity;
     var userData = int.Parse(ident.Ticket.UserData.Split('/')[0]);
-    ViewBag.Title = "Details";
-    var url = Url.Action("Index", "Info");
 
+    string[] size = Model.Size.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+    string[] color = Model.Color.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+    var url = Url.Action("Index", "Info");
+    string img = @Model.Name + ".jpg";
+
+    ViewBag.Title = "Details";
 }
 <script>
-    let url = @url;
+    let url = "@url";
 </script>
 <div style="height: 150px">
 
@@ -25,32 +29,32 @@
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" name=" ppp" data-thumb="~/images/product-detail-01.jpg">
+                            <div class="item-slick3" name=" ppp" data-thumb="~/images/@img">
                                 <div class="wrap-pic-w pos-relative">
                                   
-                                    <img src="~/images/${@Model.Name}.jpg" alt="IMG-PRODUCT">
+                                    <img src="~/images/@img" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/images/product-detail-01.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/images/@img">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="item-slick3" data-thumb="~/images/product-detail-02.jpg">
+                            <div class="item-slick3" data-thumb="~/images/@img">
                                 <div class="wrap-pic-w pos-relative">
-                                    <img src="~/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                                    <img src="~/images/@img" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/images/product-detail-02.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/images/@img">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="item-slick3" data-thumb="~/images/product-detail-03.jpg">
+                            <div class="item-slick3" data-thumb="~/images/@img">
                                 <div class="wrap-pic-w pos-relative">
-                                    <img src="~/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                                    <img src="~/images/@img" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/images/product-detail-03.jpg">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="~/images/@img">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
@@ -67,11 +71,11 @@
                     </h4>
 
                     <span class="mtext-106 cl2">
-                        @Model.Price USD
+                        @Model.Price @Model.Currency
                     </span>
 
                     <p class="stext-102 cl3 p-t-23">
-                        Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+                        @Model.Description
                     </p>
 
                     <!--  -->
@@ -85,10 +89,12 @@
                                 <div class="rs1-select2 bor8 bg0">
                                     <select class="js-select2" name="time">
                                         <option>Choose an option</option>
-                                        <option>Size S</option>
-                                        <option>Size M</option>
-                                        <option>Size L</option>
-                                        <option>Size XL</option>
+                                        @{
+                                            for (int i = 0; i < size.Length; i++)
+                                            {
+                                                <option>Size @size[i]</option>
+                                            }
+                                        }
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
@@ -104,10 +110,12 @@
                                 <div class="rs1-select2 bor8 bg0">
                                     <select class="js-select2" name="time">
                                         <option>Choose an option</option>
-                                        <option>Red</option>
-                                        <option>Blue</option>
-                                        <option>White</option>
-                                        <option>Grey</option>
+                                        @{
+                                            for (int i = 0; i < color.Length; i++)
+                                            {
+                                                <option>Size @color[i]</option>
+                                            }
+                                        }
                                     </select>
                                     <div class="dropDownSelect2"></div>
                                 </div>
@@ -184,7 +192,7 @@
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
-                                Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                                @Model.Description
                             </p>
                         </div>
                     </div>
@@ -200,7 +208,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            0.79 kg
+                                            @Model.Weight kg 
                                         </span>
                                     </li>
 
@@ -210,7 +218,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            110 x 33 x 100 cm
+                                            @Model.Dimention cm
                                         </span>
                                     </li>
 
@@ -220,7 +228,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            60% cotton
+                                            @Model.Material
                                         </span>
                                     </li>
 
@@ -230,7 +238,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            Black, Blue, Grey, Green, Red, White
+                                            @Model.Color
                                         </span>
                                     </li>
 
@@ -240,7 +248,7 @@
                                         </span>
 
                                         <span class="stext-102 cl6 size-206">
-                                            XL, L, M, S
+                                            @Model.Size
                                         </span>
                                     </li>
                                 </ul>
@@ -355,4 +363,4 @@
     </div>
 </section>
 
-<script src="~/Scripts/js/order.js" >    </script>
+<script src="~/Scripts/js/orderPage.js" >    </script>

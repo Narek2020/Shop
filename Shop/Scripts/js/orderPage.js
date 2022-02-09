@@ -3,7 +3,6 @@ $(document).ready(function () {
 
     $("#Add").click(function () {
         let count = $("#count").val();
-        console.log(count);
         $("#inputCount").val(count);
 
         $.ajax({
@@ -14,8 +13,7 @@ $(document).ready(function () {
                 let one = $(".orderCount").attr("data-notify");
                 let result = parseInt(one) + 1;
                 $(".orderCount").attr("data-notify", result);
-                
-                console.log(data);
+                window.location.reload();   
             }
         })
 
