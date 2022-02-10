@@ -12,13 +12,17 @@ namespace Shop.Controllers
     public class ProductController : Controller
     {
 
+        private readonly ProductService _productMode;
+        public ProductController()
+        {
+            _productMode = new ProductService();
+        }
+
         [HttpGet]
         [Authorize]
         public ActionResult Index()
         {
-           
-            ProductService productModel = new ProductService();
-            List<ProductModel> products = productModel.GetProducts();
+            List<ProductModel> products = _productMode.GetProducts();
 
             return View(products);
         }

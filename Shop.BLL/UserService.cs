@@ -14,11 +14,16 @@ namespace Shop.BLL
 {
     public class UserService
     {
-        UserRepository UserRepos = new UserRepository();
+        private readonly UserRepository _UserRepository;
+
+        public UserService()
+        {
+            _UserRepository = new UserRepository();
+        }
         public List<UserModel> GetUsers()
         {
             
-            var users = UserRepos.GetUsers();
+            var users = _UserRepository.GetUsers();
 
             return users.Select(u => new UserModel
             {
@@ -33,31 +38,25 @@ namespace Shop.BLL
 
         public void SetUsers(UserModel user)
         {
-            UserRepos.SetUser(user);
+            _UserRepository.SetUser(user);
         }
 
         public bool CheckUser(string userEmail)
          {
             
-            var users = UserRepos.GetUsers();
+            var users = _UserRepository.GetUsers();
             var existUser = users.Any(u => u.email == userEmail);
 
             return existUser;
         }
 
-        public int GetUserId()
-        {
 
-            return 1;
-        }
-        //TODO:poxancel model 
         public bool GetUsersForLogin(UserModel user)
         {
             
             bool result = false;
             var users = GetUsers();
             var existuser = users.Where(u => u.Email == user.Email && u.Password == user.Password).FirstOrDefault();
-
 
             if (existuser != null)
             {

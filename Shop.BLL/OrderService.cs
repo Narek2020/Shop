@@ -10,15 +10,21 @@ namespace Shop.BLL
 {
     public class OrderService
     {
-        OrderRepository ProductOrder = new OrderRepository();
+        private readonly OrderRepository _productOrderRepository;
+
+        public OrderService()
+        {
+           _productOrderRepository = new OrderRepository();
+        }
+       
         public void SetOrder(OrderModel order)
         {
-            ProductOrder.SetOrder(order);
+            _productOrderRepository.SetOrder(order);
         }
 
         public List<OrderProductModel> GetOrder(string userName)
         {
-            var dbProduct = ProductOrder.GetProduct();
+            var dbProduct = _productOrderRepository.GetProduct();
 
             var userOrderedProducts = dbProduct.Where(pr => pr.User.email == userName).Select(pr => new OrderProductModel() { 
             

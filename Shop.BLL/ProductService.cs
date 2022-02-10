@@ -10,11 +10,15 @@ namespace Shop.BLL
 {
     public class ProductService
     {
-        ProductRepository ProductRepos = new ProductRepository();
+        private readonly ProductRepository _productRepository;
+        public ProductService()
+        {
+            _productRepository = new ProductRepository();
+        }
 
         public ProductModel GetProductById(int productId)
         {
-            var products = ProductRepos.GetProduct();
+            var products = _productRepository.GetProduct();
 
             return products.Where(u => u.id == productId).Select(u => new ProductModel
             {
@@ -33,8 +37,7 @@ namespace Shop.BLL
         }
         public List<ProductModel> GetProducts()
         {
-            
-            var products = ProductRepos.GetProduct();
+            var products = _productRepository.GetProduct();
 
             return products.Select(u => new ProductModel
             {

@@ -11,16 +11,18 @@ namespace Shop.Controllers
     [Authorize]
     public class InfoController : Controller
     {
+        private readonly ProductService _productModel;
+        private readonly OrderService _orderService;
+        public InfoController()
+        {
+            _productModel = new ProductService();
+            _orderService = new OrderService();
+        }
         [HttpGet]
         public ActionResult Index(int id)
         {
 
-            var t = User.Identity.Name;
-            ProductService productModel = new ProductService();
-            ProductModel product = productModel.GetProductById(id);
-
-
-            //gtnel model@ ev poxanvel view
+            ProductModel product = _productModel.GetProductById(id);
 
             return View(product);
         }
@@ -28,10 +30,7 @@ namespace Shop.Controllers
         [HttpPost]
         public ActionResult Index(OrderModel productOrder)
         {
-            OrderService order = new OrderService();
-            order.SetOrder(productOrder);
-
-            //gtnel model@ ev poxanvel view
+            _orderService.SetOrder(productOrder);
 
             return Json("OK");
         }
